@@ -37,15 +37,37 @@
         });
 
         // Add a layer showing the state polygons.
-        map.addLayer({
-            'id': 'states-layer',
-            'type': 'fill',
-            'source': 'states',
-            'paint': {
-                'fill-color': 'rgba(200, 100, 240, 0.4)',
-                'fill-outline-color': 'rgba(200, 100, 240, 1)'
+        map.addLayer(
+            {
+                'id': 'states-layer',
+                'type': 'fill',
+                'source': 'states',
+                'paint': {
+                    'fill-color': 'rgba(200, 100, 240, 0.4)',
+                    'fill-outline-color': 'rgba(200, 100, 240, 1)'
             }
         });
+
+        map.addSource('country-boundaries', {
+            'type': 'vector',
+            'url': 'mapbox://mapbox.country-boundaries-v1'
+        });
+
+        map.addLayer(
+            {
+                'id': 'countries-layer',
+                'type': 'fill',
+                'source': 'country-boundaries',
+                'source-layer': 'country_boundaries',
+                'layout': {
+                    'visibility': 'visible'
+                },
+                'paint': {
+                    'fill-color': 'rgba(200, 100, 240, 0.4)',
+                    'fill-outline-color': 'rgba(200, 100, 240, 1)'
+                }                            
+            }
+        );
 
         // When a click event occurs on a feature in the states layer, open a popup at the
         // location of the click, with description HTML from its properties.
