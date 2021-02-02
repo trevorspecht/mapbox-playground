@@ -78,7 +78,7 @@
                 .addTo(map);
         });
 
-        map.on('click', 'country-boundaries', function (e) {
+        map.on('click', 'countries-layer', function (e) {
             new mapboxgl.Popup()
                 .setLngLat(e.lngLat)
                 .setHTML(e.features[0].properties.name)
@@ -95,12 +95,12 @@
             map.getCanvas().style.cursor = '';
         });
 
-        map.on('mouseenter', 'country-boundaries', function () {
+        map.on('mouseenter', 'countries-layer', function () {
             map.getCanvas().style.cursor = 'pointer';
         });
 
         // Change it back to a pointer when it leaves.
-        map.on('mouseleave', 'country-boundaries', function () {
+        map.on('mouseleave', 'countries-layer', function () {
             map.getCanvas().style.cursor = '';
         });
     });
