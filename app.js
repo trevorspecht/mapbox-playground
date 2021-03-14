@@ -29,7 +29,7 @@ function createPopup(currentFeature) {
   if (popups[0]) popups[0].remove();
   const popup = new mapboxgl.Popup({ closeOnClick: true })
     .setLngLat(currentFeature.geometry.coordinates)
-    .setHTML("<h3>" + currentFeature.properties[config.popupInfo] + "</h3>")
+    .setHTML("<h3" + ' style="color: #2F215F; text-decoration: underline;"' + ">" + "<a href=" + currentFeature.properties[config.popupInfo[1]] + ' target="_blank" rel="noopener noreferrer"' + ">" + currentFeature.properties[config.popupInfo[0]] + "</a>" + "</h3>")
     .addTo(map);
 }
 
@@ -450,12 +450,24 @@ map.on("load", function () {
             data: geojsonData,
           },
           paint: {
-            "circle-radius": 5, // size of circles
-            "circle-color": "#3D2E5D", // color of circles
-            "circle-stroke-color": "white",
-            "circle-stroke-width": 1,
+            "circle-radius": 5,
             "circle-opacity": 0.7,
-          },
+            "circle-color": {
+                property: 'Cuisine', // geojson property to use to determine circle color
+                type: 'categorical',
+                stops: [
+                  ['African/Caribbean', '#563391'],
+                  ['American', '#BE2F77'],
+                  ['Asian', '#980DBA'],
+                  ['Breakfast Specialty', '#1AAEC6'],
+                  ['Seafood', '#1557EA'],
+                  ['Soul/Creole', '#500363'],
+                  ['Vegan/Healthy', '#5BD5B0'],
+                  ['Dessert', '#5980CF'],
+                  ['Coffee/Tea', '#CE9D78']
+                ]
+              }
+          }
         });
       }
     );
